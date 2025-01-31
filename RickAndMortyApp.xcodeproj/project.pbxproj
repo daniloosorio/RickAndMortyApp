@@ -53,14 +53,14 @@
 		871CECF62D4B172B0015D2D3 /* Exceptions for "RickAndMortyAppTests" folder in "RickAndMortyApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Features/Fakes/RawData/CharacterListFake.swift,
+				Fakes/RawData/CharacterListFake.swift,
 			);
 			target = 87C5BC952D4877B0005353A7 /* RickAndMortyApp */;
 		};
 		871CECF82D4B172B0015D2D3 /* Exceptions for "RickAndMortyAppTests" folder in "RickAndMortyAppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Features/Fakes/RawData/CharacterListFake.swift,
+				Fakes/RawData/CharacterListFake.swift,
 			);
 			target = 871CECEC2D4B17160015D2D3 /* RickAndMortyAppTests */;
 		};
