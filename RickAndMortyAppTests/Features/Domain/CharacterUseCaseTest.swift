@@ -28,13 +28,44 @@ final class CharacterUseCaseTest: XCTestCase {
 
 // MARK: - Succes tests
 extension CharacterUseCaseTest {
-    func testSuccessCase_ResponseEntityIsNotNil() {
-        
+    func testSuccessCase_getCharacterList() async{
+        do {
+            let response = try await sut?.getCharactersList(pageNumber: nil)
+            XCTAssert(response?.results.first?.id == 21)
+            
+        }catch {
+            XCTFail("Always receive a response and not throw an error")
+        }
+    }
+    
+    func testSuccesCase_SearchCharacter() async{
+        do {
+            let response = try await sut?.searchCharacter(by: "Rick", and: nil)
+            XCTAssert(response?.results.first?.id == 21)
+        }
+            catch {
+            XCTFail("Always receive a response and not throw an error")
+        }
     }
 }
 // MARK: - Failure Tests
 extension CharacterUseCaseTest {
-    func testFailureCase_ResponseEntityIsNilAndReceiveError() {
-        
+ 
+    func testFailureCase_getCharacterList() async{
+        do{
+            let _ = try await sutFailure?.getCharactersList(pageNumber: nil)
+            XCTFail("Should throw an error")
+        }catch{
+            //passed
+        }
+    }
+    
+    func testFailureCase_SearchCharacter() async{
+        do{
+            let _ = try await sutFailure?.searchCharacter(by: "Rick", and: nil)
+            XCTFail("Should throw an error")
+        }catch{
+            //passed 
+        }
     }
 }
