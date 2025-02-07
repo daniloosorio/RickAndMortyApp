@@ -49,3 +49,15 @@ import Observation
     }
     
 }
+
+// extencion to initialiced
+extension SectionRowModel {
+    init(businessModel: CharacterBusinessModel){
+        self.id = businessModel.id
+        self.title = businessModel.name
+        self.subtitle = businessModel.species
+        self.text = "\(String(describing: businessModel.gender?.rawValue ?? "")) - \(businessModel.origin.name) - \(String(describing: businessModel.status?.rawValue ?? ""))"
+        self.image = businessModel.image
+        self.progress = businessModel.status == .alive ? 1.0 : 0.1
+    }
+}
