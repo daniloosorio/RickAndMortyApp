@@ -36,7 +36,7 @@ struct HomePage: View {
                   message: Text(viewModel.viewError?.localizedDescription ?? "Unexpected errir is happen"),
                   dismissButton: .default(Text("Go it!")))
         }.sheet(isPresented: $showDetail, content: {
-            CharacterDetailView(character: selectedCharacter)
+            CharacterDetailPage(character: selectedCharacter)
         }
         )
     }
