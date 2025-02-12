@@ -6,19 +6,19 @@
 //
 
 import XCTest
-@testable import //here target
+@testable import RickAndMortyApp
 
 //MARK: - Test
-class Test: XCTestCase {
+class SearchPageViewModelTest: XCTestCase {
     
     //GIVEN
-    private var sut: UseCase?
-    private var sutFailure : UseCase?
+    private var sut: SearchPageViewModel?
+    private var sutFailure : SearchPageViewModel?
     
     override func setUp() {
         super.setUp()
-        sut = Default(repository: RepositorySuccesMok())
-        sutFailure = Default(repository: RepositoryFailureMok())
+        sut = SearchPageViewModel(useCase: DefaultCharacterUseCase(repository: DefaultCharacterRepository(apiService: CharacterListFakeApiServiceSuccess())))
+        sutFailure = SearchPageViewModel(useCase: DefaultCharacterUseCase(repository: DefaultCharacterRepository(apiService: CharacterListFakeApiServiceFailure())))
     }
     
     override func tearDown() {
@@ -29,23 +29,32 @@ class Test: XCTestCase {
 }
 
 //MARK: - Success Test
-extension Test {
-    func testSuccess() {
+extension SearchPageViewModelTest {
+    func testSuccessCaseSearchCharacter() async {
         //WHEN use sut here
-        
+        await sut?.searchCharacter(by: "Rick", isFirstLoad: true)
         //THEN make assert here
+        XCTAssert(sut?.characterList.first?.id == 21)
+    }
+    
+    func testSuccessCaseSearchCharacterEmptyName() async {
+        //WHEN use sut here
+        await sut?.searchCharacter(by: "", isFirstLoad: true)
+        //THEN make assert here
+        XCTAssert(sut?.characterList.isEmpty ?? false)
     }
 }
 
 //MARK: - Failure Test
-extension Test {
-    func testFailure() {
+extension SearchPageViewModelTest {
+    func testFailureCaseSearchCharacter() async {
         //GIVEN
         guard let sutFailure = sutFailure else { return }
         
         //WHEN use sutFailure here
-        
+        await sutFailure.searchCharacter(by: "Rick",isFirstLoad: true)
         //THEN make assert here
+        XCTAssert(sutFailure.characterList.isEmpty)
         
     }
 }
